@@ -3,10 +3,10 @@
 // Assign a rock,paper,scissors based on the values -- equally splitting
 // return the value
 function getComputerChoice() {
-  let n = Math.random() * 3;
-  if (n <= 1) {
+  let n = Math.floor(Math.random() * 3);
+  if (n === 0) {
     return "rock";
-  } else if (n <= 2) {
+  } else if (n === 1) {
     return "paper";
   } else {
     return "scissors";
@@ -27,25 +27,21 @@ function getHumanChoice() {
 // print the winner
 
 function playRound(humanChoice, computerChoice) {
-  let lowerHumanChoice = humanChoice.toLowerCase();
+  const lowerHumanChoice = humanChoice.toLowerCase();
 
   if (
-    (lowerHumanChoice == "rock" && computerChoice == "scissors") ||
-    (lowerHumanChoice == "paper" && computerChoice == "rock") ||
-    (lowerHumanChoice == "scissors" && computerChoice == "paper")
+    (lowerHumanChoice === "rock" && computerChoice === "scissors") ||
+    (lowerHumanChoice === "paper" && computerChoice === "rock") ||
+    (lowerHumanChoice === "scissors" && computerChoice === "paper")
   ) {
     console.log(`You win! ${lowerHumanChoice} beats ${computerChoice}`);
-    return 1;
-  } else if (
-    (lowerHumanChoice == "rock" && computerChoice == "rock") ||
-    (lowerHumanChoice == "paper" && computerChoice == "paper") ||
-    (lowerHumanChoice == "scissors" && computerChoice == "scissors")
-  ) {
+    return "human";
+  } else if (lowerHumanChoice == computerChoice) {
     console.log(`It's a tie! You both chose ${computerChoice}`);
-    return 2;
+    return "tie";
   } else {
     console.log(`You lose! ${computerChoice} beats ${lowerHumanChoice}`);
-    return 3;
+    return "computer";
   }
 }
 
@@ -64,10 +60,10 @@ function playGame() {
     const gameResult = playRound(humanSelection, computerSelection);
 
     switch (gameResult) {
-      case 1:
+      case "human":
         humanScore++;
         break;
-      case 3:
+      case "computer":
         computerScore++;
         break;
     }
