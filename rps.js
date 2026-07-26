@@ -22,3 +22,36 @@ function getHumanChoice() {
 
 let humanScore = 0;
 let computerScore = 0;
+
+// Create a function called playRound(humanChoice, computerChoice)
+// Convert human choice to lowercase (matches computerChoice)
+// Compare choices to determine the winner
+// increment one of the score global variables depending on winner
+// print the winner
+
+function playRound(humanChoice, computerChoice) {
+  let lowerHumanChoice = humanChoice.toLowerCase();
+
+  if (
+    (lowerHumanChoice == "rock" && computerChoice == "scissors") ||
+    (lowerHumanChoice == "paper" && computerChoice == "rock") ||
+    (lowerHumanChoice == "scissors" && computerChoice == "paper")
+  ) {
+    humanScore++;
+    console.log(`You win! ${lowerHumanChoice} beats ${computerChoice}`);
+  } else if (
+    (lowerHumanChoice == "rock" && computerChoice == "rock") ||
+    (lowerHumanChoice == "paper" && computerChoice == "paper") ||
+    (lowerHumanChoice == "scissors" && computerChoice == "scissors")
+  ) {
+    console.log(`It's a tie! You both chose ${computerChoice}`);
+  } else {
+    computerScore++;
+    console.log(`You lose! ${computerChoice} beats ${lowerHumanChoice}`);
+  }
+}
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
