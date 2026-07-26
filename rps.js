@@ -12,3 +12,10 @@ function getComputerChoice() {
     return "scissors";
   }
 }
+
+// Crate a function call getHumanChoice
+// Prompt the user for a choice (assume they will enter a valid option)
+// return the input
+function getHumanChoice() {
+  return prompt("Enter Rock, Paper, or Scissors:");
+}
