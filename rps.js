@@ -54,20 +54,24 @@ function playRound(humanChoice, computerChoice) {
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
-  for (let i = 0; i < 5; i++) {
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
-    const gameResult = playRound(humanSelection, computerSelection);
 
-    switch (gameResult) {
-      case "human":
-        humanScore++;
-        break;
-      case "computer":
-        computerScore++;
-        break;
-    }
-  }
+  const buttons = document.querySelectorAll(".choice-btn");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const humanSelection = button.value;
+      const computerSelection = getComputerChoice();
+      const gameResult = playRound(humanSelection, computerSelection);
+
+      switch (gameResult) {
+        case "human":
+          humanScore++;
+          break;
+        case "computer":
+          computerScore++;
+          break;
+      }
+    });
+  });
 
   if (humanScore > computerScore) {
     console.log(`You won with a score of ${humanScore} to ${computerScore}`);
