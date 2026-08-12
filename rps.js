@@ -59,6 +59,21 @@ function playGame() {
   const winner = document.createElement("p");
   gameResultDisplay.appendChild(winner);
 
+  const resetbtn = document.createElement("button");
+  resetbtn.addEventListener("click", () => {
+    humanScore = 0;
+    computerScore = 0;
+    humanSR.innerHTML = humanScore;
+    computerSR.innerHTML = computerScore;
+    winner.innerHTML = "";
+
+    buttons.forEach((button) => {
+      button.disabled = false;
+    });
+
+    gameResultDisplay.removeChild(resetbtn);
+  });
+
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const humanSelection = button.value;
@@ -78,10 +93,24 @@ function playGame() {
 
       if (humanScore == 5) {
         winner.innerHTML = `You won with a score of ${humanScore} to ${computerScore}`;
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        resetbtn.innerHTML = "Reset";
+        gameResultDisplay.appendChild(resetbtn);
       } else if (computerScore === 5) {
         console.log(
           (winner.innerHTML = `You lost with a score of ${humanScore} to ${computerScore}`),
         );
+
+        buttons.forEach((button) => {
+          button.disabled = true;
+        });
+
+        resetbtn.innerHTML = "Reset";
+        gameResultDisplay.appendChild(resetbtn);
       }
     });
   });
