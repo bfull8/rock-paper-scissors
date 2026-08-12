@@ -56,6 +56,9 @@ function playGame() {
   let computerScore = 0;
 
   const buttons = document.querySelectorAll(".choice-btn");
+  const humanSR = document.querySelector("#human-score");
+  const computerSR = document.querySelector("#computer-score");
+
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
       const humanSelection = button.value;
@@ -65,9 +68,11 @@ function playGame() {
       switch (gameResult) {
         case "human":
           humanScore++;
+          humanSR.innerHTML = String(humanScore);
           break;
         case "computer":
           computerScore++;
+          computerSR.innerHTML = computerScore;
           break;
       }
     });
