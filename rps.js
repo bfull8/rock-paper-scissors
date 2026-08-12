@@ -59,6 +59,9 @@ function playGame() {
   const winner = document.createElement("p");
   gameResultDisplay.appendChild(winner);
 
+  const roundResult = document.createElement("p");
+  gameResultDisplay.appendChild(roundResult);
+
   const resetbtn = document.createElement("button");
   resetbtn.addEventListener("click", () => {
     humanScore = 0;
@@ -80,6 +83,8 @@ function playGame() {
       const computerSelection = getComputerChoice();
       const gameResult = playRound(humanSelection, computerSelection);
 
+      roundResult.innerHTML = `You played ${humanSelection} and the computer played ${computerSelection}`;
+
       switch (gameResult) {
         case "human":
           humanScore++;
@@ -92,6 +97,7 @@ function playGame() {
       }
 
       if (humanScore == 5) {
+        roundResult.innerHTML = "";
         winner.innerHTML = `You won with a score of ${humanScore} to ${computerScore}`;
 
         buttons.forEach((button) => {
@@ -101,9 +107,8 @@ function playGame() {
         resetbtn.innerHTML = "Reset";
         gameResultDisplay.appendChild(resetbtn);
       } else if (computerScore === 5) {
-        console.log(
-          (winner.innerHTML = `You lost with a score of ${humanScore} to ${computerScore}`),
-        );
+        roundResult.innerHTML = "";
+        winner.innerHTML = `You lost with a score of ${humanScore} to ${computerScore}`;
 
         buttons.forEach((button) => {
           button.disabled = true;
