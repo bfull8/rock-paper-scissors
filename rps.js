@@ -34,13 +34,10 @@ function playRound(humanChoice, computerChoice) {
     (lowerHumanChoice === "paper" && computerChoice === "rock") ||
     (lowerHumanChoice === "scissors" && computerChoice === "paper")
   ) {
-    console.log(`You win! ${lowerHumanChoice} beats ${computerChoice}`);
     return "human";
   } else if (lowerHumanChoice == computerChoice) {
-    console.log(`It's a tie! You both chose ${computerChoice}`);
     return "tie";
   } else {
-    console.log(`You lose! ${computerChoice} beats ${lowerHumanChoice}`);
     return "computer";
   }
 }
@@ -58,6 +55,9 @@ function playGame() {
   const buttons = document.querySelectorAll(".choice-btn");
   const humanSR = document.querySelector("#human-score");
   const computerSR = document.querySelector("#computer-score");
+  const gameResultDisplay = document.querySelector("#game-result");
+  const winner = document.createElement("p");
+  gameResultDisplay.appendChild(winner);
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -68,23 +68,23 @@ function playGame() {
       switch (gameResult) {
         case "human":
           humanScore++;
-          humanSR.innerHTML = String(humanScore);
+          humanSR.innerHTML = humanScore;
           break;
         case "computer":
           computerScore++;
           computerSR.innerHTML = computerScore;
           break;
       }
+
+      if (humanScore == 5) {
+        winner.innerHTML = `You won with a score of ${humanScore} to ${computerScore}`;
+      } else if (computerScore === 5) {
+        console.log(
+          (winner.innerHTML = `You lost with a score of ${humanScore} to ${computerScore}`),
+        );
+      }
     });
   });
-
-  if (humanScore > computerScore) {
-    console.log(`You won with a score of ${humanScore} to ${computerScore}`);
-  } else if (humanScore < computerScore) {
-    console.log(`You lost with a score of ${humanScore} to ${computerScore}`);
-  } else {
-    console.log(`You tied with a score of ${humanScore} to ${computerScore}`);
-  }
 }
 
 playGame();
